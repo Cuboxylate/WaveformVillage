@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,7 +9,7 @@ public class FourTileInfoGenerator : MonoBehaviour
         // Create compatibility infos for everyone (relies on me knowing the list order)
         TileInfo strHor = new TileInfo(tiles[0], "Horizontal Road", 1f);
         TileInfo strVer = new TileInfo(tiles[1], "Vertical Road", 1f);
-        TileInfo xInt = new TileInfo(tiles[2], "X Intersection", 0.25f);
+        TileInfo xInt = new TileInfo(tiles[2], "X Intersection", 0.1f);
         TileInfo house = new TileInfo(tiles[3], "House", 2f);
 
         // Define which tiles are allowed next to each other

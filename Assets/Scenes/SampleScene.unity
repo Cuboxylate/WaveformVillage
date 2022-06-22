@@ -301,18 +301,6 @@ MonoBehaviour:
   villageMap: {fileID: 485387745}
   villageWidth: 40
   villageHeight: 20
-  roadTiles:
-  - {fileID: 11400000, guid: 40c82a1ee10590044a2e3b2846d6b4c5, type: 2}
-  - {fileID: 11400000, guid: b9bbbb23764a3f748b3df2b7530d38eb, type: 2}
-  - {fileID: 11400000, guid: 9269a58dcc91b434e907a8a95a9370f1, type: 2}
-  - {fileID: 11400000, guid: 6d45556ffb0b064448c909c40f0e65f7, type: 2}
-  - {fileID: 11400000, guid: 054902f052f83264596425f12f98304d, type: 2}
-  - {fileID: 11400000, guid: 273da37d33e496a40bae2839dda314c8, type: 2}
-  - {fileID: 11400000, guid: d4b8c0bc41f90c64ea018768bc860043, type: 2}
-  - {fileID: 11400000, guid: 43ae4cdc0199bef49934f9efb5701c3d, type: 2}
-  - {fileID: 11400000, guid: 470355dc9f57be747a505fb8299d243e, type: 2}
-  - {fileID: 11400000, guid: 1f9c269223d8ee24e9856ad73025a435, type: 2}
-  - {fileID: 11400000, guid: e2a4b4286f83d8b4a88cb7f612872994, type: 2}
   houseTiles:
   - {fileID: 11400000, guid: f71e07cd0db50a545a8742af9031710c, type: 2}
   - {fileID: 11400000, guid: 0ab925fd69d2fb64296ba007619bf873, type: 2}
@@ -324,7 +312,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 054902f052f83264596425f12f98304d, type: 2}
   - {fileID: 11400000, guid: 273da37d33e496a40bae2839dda314c8, type: 2}
   - {fileID: 11400000, guid: e2a4b4286f83d8b4a88cb7f612872994, type: 2}
+  eightSetRoads:
+  - {fileID: 11400000, guid: 054902f052f83264596425f12f98304d, type: 2}
+  - {fileID: 11400000, guid: 273da37d33e496a40bae2839dda314c8, type: 2}
+  - {fileID: 11400000, guid: e2a4b4286f83d8b4a88cb7f612872994, type: 2}
+  - {fileID: 11400000, guid: 40c82a1ee10590044a2e3b2846d6b4c5, type: 2}
+  - {fileID: 11400000, guid: b9bbbb23764a3f748b3df2b7530d38eb, type: 2}
+  - {fileID: 11400000, guid: 9269a58dcc91b434e907a8a95a9370f1, type: 2}
+  - {fileID: 11400000, guid: 6d45556ffb0b064448c909c40f0e65f7, type: 2}
   drawAlgorithm: 1
+  complexity: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

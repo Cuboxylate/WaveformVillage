@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -12,26 +10,46 @@ public class VillageMaker : MonoBehaviour
     public Tilemap villageMap;
     public int villageWidth;
     public int villageHeight;
-    public List<Tile> roadTiles;
     public List<Tile> houseTiles;
     public List<Tile> fourSetRoads;
+    public List<Tile> eightSetRoads;
     public bool drawAlgorithm;
+    public Complexity complexity;
 
     private Dictionary<Tile, TileInfo> _infos;
+    private List<Tile> roadTiles;
     private HashSet<Tile>[,] _villageState;
     private List<TileState> _states = new List<TileState>();
 
     private bool _villageInContradiction = true;
     private int _unassignedTiles;
+    
+    public enum Complexity
+    {
+        FourTiles,
+        EightTiles
+    }
 
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Starting");
-        List<Tile> allTiles = new List<Tile>(fourSetRoads) {houseTiles[0]};
+        List<Tile> allTiles;
 
-        // _infos = TwelveTileInfoGenerator.GetCompatibilityInfo(roadTiles, houseTiles[0]);
-        _infos = FourTileInfoGenerator.GetCompatibilityInfo(allTiles);
+        switch (complexity)
+        {
+            case Complexity.FourTiles:
+                allTiles = new List<Tile>(fourSetRoads) {houseTiles[0]};
+                _infos = FourTileInfoGenerator.GetCompatibilityInfo(allTiles);
+                roadTiles = fourSetRoads;
+                break;
+            case Complexity.EightTiles:
+            default:
+                allTiles = new List<Tile>(eightSetRoads) {houseTiles[0]};
+                _infos = EightTileInfoGenerator.GetCompatibilityInfo(allTiles);
+                roadTiles = eightSetRoads;
+                break;
+        }
+    
         Debug.Log("Generated compatibility info");
         
         int count = 0;
@@ -40,6 +58,7 @@ public class VillageMaker : MonoBehaviour
             count++;
             Debug.Log("Starting village calc #" + count);
             _villageState = InitVillageState(allTiles);
+            if (drawAlgorithm) _states = new List<TileState>();
             _villageInContradiction = false;
             CalculateVillageState();
         }
@@ -57,7 +76,7 @@ public class VillageMaker : MonoBehaviour
         foreach (TileState state in _states)
         {
             villageMap.SetTile(state.Position, state.Tile);
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
     
@@ -80,7 +99,7 @@ public class VillageMaker : MonoBehaviour
         // Init first tile to either a house or road tile with 50/50 chance
         Tile firstTile = Random.Range(0f, 1f) > 0.5
             ? houseTiles[0]
-            : fourSetRoads[Random.Range(0, fourSetRoads.Count)];
+            : roadTiles[Random.Range(0, roadTiles.Count)];
         
         _villageState[y, x] = new HashSet<Tile> {firstTile};
         
@@ -89,7 +108,7 @@ public class VillageMaker : MonoBehaviour
 
     private Vector2 SelectTileWithFewestPossibilities()
     {
-        int lowestCount = fourSetRoads.Count + 2;
+        int lowestCount = roadTiles.Count + 2;
         List<Vector2> coords = new List<Vector2>(); // current coords with the lowest count
 
         for (int row = 0; row < villageHeight; row++)
